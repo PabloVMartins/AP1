@@ -2,55 +2,91 @@ import Mobs from "./mobs";
 
 export default class Personagem {
     constructor(
-        public nome: string,
-        public HPMax: number,
-        public vida: number,
-        public destreza: number,
-        public ataque: number,
-        public esquiva: number,
-        public defesa: number,
-        public stamina: number,
-        public xp: number,
-        public xpNecessario: number
+        private _nome: string,
+        private _HPMax: number,
+        private _vida: number,
+        private _destreza: number,
+        private _ataque: number,
+        private _esquiva: number,
+        private _defesa: number,
+        private _stamina: number,
+        private _xp: number,
+        private _xpNecessario: number,
+        private _level: number
     ) { }
+
+    
+    public get nome() : string {
+        return this._nome;
+    }
+    public get HPMax() : number {
+        return this._HPMax;
+    }
+    public get vida() : number {
+        return this._vida;
+    }
+    public get destreza() : number {
+        return this._destreza
+    }
+    public get ataque() : number {
+        return this._ataque
+    }
+    public get esquiva() : number {
+        return this._esquiva
+    }
+    public get defesa() : number {
+        return this._defesa
+    }
+    public get xp() : number {
+        return this._xp
+    }
+
+
+    public set setVida(valor : number) {
+        this._vida = valor;
+    }
+
+
     status(): string {
         return (
             "\nNome: " +
-            this.nome +
-            ("\nHP: " + this.vida + '/' + this.HPMax) +
-            ("\nDestreza: " + this.destreza) +
-            ("\nAtaque: " + this.ataque) +
-            ("\nDefesa: " + this.defesa) +
-            ("\nEsquiva: " + this.esquiva) +
-            ("\nStamina: " + this.stamina) +
-            ("\nExperiência: " + this.xp.toFixed(2) + '/' + this.xpNecessario.toFixed(2))
+            this._nome +
+            ("\nNivel: " + this._level) +
+            ("\nHP: " + this._vida + '/' + this._HPMax) +
+            ("\nDestreza: " + this._destreza) +
+            ("\nAtaque: " + this._ataque) +
+            ("\nDefesa: " + this._defesa) +
+            ("\nEsquiva: " + this._esquiva) +
+            ("\nStamina: " + this._stamina) +
+            ("\nExperiência: " + this._xp + "\n")       
         );
     }
     up(): void {
-        this.HPMax += 2 + Math.round(Math.random() * 10);
-        this.destreza += 2 + Math.round(Math.random() * 5);
-        this.ataque += 2 + Math.round(Math.random() * 5);
-        this.esquiva += 2 + Math.round(Math.random() * 5);
-        this.defesa += 2 + Math.round(Math.random() * 5);
+        this._HPMax += 2 + Math.round(Math.random() * 10);
+        this._destreza += 2 + Math.round(Math.random() * 5);
+        this._ataque += 2 + Math.round(Math.random() * 5);
+        this._esquiva += 2 + Math.round(Math.random() * 5);
+        this._defesa += 2 + Math.round(Math.random() * 5);
+        this._level += 1;
 
     }
     matou(mobs: Mobs): string {
         let xpGanho
         
-        this.xp += mobs.xp;
+        this._xp += mobs.xp;
 
         xpGanho = `\nVocê ganhou ${mobs.xp} de experiência`
-        while (this.xp >= this.xpNecessario) {
-            xpGanho += "\nLevel Up!! \n" + this.status() + "\n |  |  |  |\n V  V  V  V\n"
+        while (this._xp >= this._xpNecessario) {
+            xpGanho += "\nLevel Up!! \n" + "\n |  |  |  |\n V  V  V  V\n"
             this.up();
-            this.xpNecessario *= 1.3
+            this._xpNecessario *= 2
             xpGanho += this.status();
         }
         return (xpGanho);
     }
     descansar(): string {
-        this.stamina = 100;
-        this.vida = this.HPMax;
+        this._stamina = 100;
+        this._vida = this._HPMax;
         return ("HP Recuperado!");
     }
     atacar(mobs: Mobs): string {
@@ -58,13 +94,13 @@ export default class Personagem {
         let acerto = false;
         let frase = '';
 
-        if (Math.random() * (this.ataque + this.destreza) > Math.random() * (mobs.esquiva + mobs.destreza)) {
+        if (Math.random() * (this._ataque + this._destreza) > Math.random() * (mobs.esquiva + mobs.destreza)) {
             acerto = true;
-            dano = this.ataque - mobs.defesa;
-            if (this.ataque <= mobs.defesa) {
+            dano = this._ataque - mobs.defesa;
+            if (this._ataque <= mobs.defesa) {
                 dano = 1;
             }
-            mobs.vida -= dano;
+            mobs.setVida = mobs.vida - dano;
         }
 
         if (acerto) {
@@ -83,7 +119,7 @@ export default class Personagem {
         }
 
 
-        if (this.vida <= 0) {
+        if (this._vida <= 0) {
             frase += '\nVocê foi derrotado!'
         }
         return (frase);
@@ -92,16 +128,16 @@ export default class Personagem {
     Batalha(mobs: Mobs): string[] {
 
         let logBatalha: string[] = []
-        mobs.vida = mobs.HPMax;
+        mobs.setVida = mobs.HPMax;
 
 
-        for (let i = 0; this.vida > 0 && mobs.vida > 0; i++) {
+        for (let i = 0; this._vida > 0 && mobs.vida > 0; i++) {
             logBatalha.push(this.atacar(mobs));
 
         };
 
-        if (this.vida <= 0) {
-            this.vida = 1;
+        if (this._vida <= 0) {
+            this._vida = 1;
         }
         else {           
             logBatalha.push(this.matou(mobs));
@@ -109,5 +145,11 @@ export default class Personagem {
 
         logBatalha.push('Fim da Batalha!!!')
         return (logBatalha);
+    }
+
+    definirNivel(Nivel: number): void {
+        for (let i = 0; i < Nivel-1; i++) {
+            this.up();
+        }
     }
 }
