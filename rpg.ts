@@ -2,17 +2,17 @@ import Personagem from "./person";
 import Mobs from "./mobs";
 import prompt from "prompt-sync";
 
-let person: Personagem = new Personagem("Suyside", 15, 15, 15, 13, 13, 13, 50, 0, 5, 1);
+let person: Personagem = new Personagem("Suyside");
 
-// person.definirNivel(100);
+ // person.definirNivel(50);
 
 let mobs: Mobs[] = []
 
-mobs[0] = (new Mobs("Slime", 5 + Math.random() * 10, 0, 5 + Math.random() * 15, 5 + Math.round(Math.random() * 10), 3 + Math.random() * 10, 3 + Math.round(Math.random() * 10), 5));
-mobs[1] = (new Mobs("Goblin", 15 + Math.random() * 15, 0, 10 + Math.random() * 30, 10 + Math.round(Math.random() * 20), 6 + Math.random() * 15, 6 + Math.round(Math.random() * 15), 10));
-mobs[2] = (new Mobs("Orc", 30 + Math.random() * 20, 0, 20 + Math.random() * 50, 20 + Math.round(Math.random() * 30), 12 + Math.random() * 20, 12 + Math.round(Math.random() * 20), 20));
-mobs[3] = (new Mobs("Vampiro", 60 + Math.random() * 30, 0, 40 + Math.random() * 75, 40 + Math.round(Math.random() * 40), 24 + Math.random() * 30, 24 + Math.round(Math.random() * 30), 40));
-mobs[4] = (new Mobs("Dragão", 240 + Math.random() * 50, 1, 120 + Math.random() * 100, 120 + Math.round(Math.random() * 50), 96 + Math.random() * 50, 96 + Math.round(Math.random() * 50), 100000000));
+mobs[0] = new Mobs("Slime");
+mobs[1] = new Mobs("Goblin");
+mobs[2] = new Mobs("Orc");
+mobs[3] = new Mobs("Vampiro");
+mobs[4] = new Mobs("Dragão");
 
 
 let teclado = prompt();
@@ -88,19 +88,19 @@ if (mobs[4].vida <= 0) {
 function geraçãoMobs(selecao: number) {
   
     if (selecao == 1) {
-        mobs[0] = (new Mobs("Slime", 5 + Math.random() * 10, 0, 5 + Math.random() * 15, 5 + Math.round(Math.random() * 10), 3 + Math.random() * 10, 3 + Math.round(Math.random() * 10), 5));
+        mobs[0] = new Mobs("Slime");
     }
     if (selecao == 2) {
-        mobs[1] = (new Mobs("Goblin", 15 + Math.random() * 15, 0, 10 + Math.random() * 30, 10 + Math.round(Math.random() * 20), 6 + Math.random() * 15, 6 + Math.round(Math.random() * 15), 10));
+        mobs[1] = new Mobs("Goblin");
     }
     if (selecao == 3) {
-        mobs[2] = (new Mobs("Orc", 30 + Math.random() * 20, 0, 20 + Math.random() * 50, 20 + Math.round(Math.random() * 30), 12 + Math.random() * 20, 12 + Math.round(Math.random() * 20), 20));
+        mobs[2] = new Mobs("Orc");
     }
     if (selecao == 4) {
-        mobs[3] = (new Mobs("Vampiro", 60 + Math.random() * 30, 0, 40 + Math.random() * 75, 40 + Math.round(Math.random() * 40), 24 + Math.random() * 30, 24 + Math.round(Math.random() * 30), 40));
+        mobs[3] = new Mobs("Vampiro");
     }
     if (selecao == 5) {
-        mobs[4] = (new Mobs("Dragão", 240 + Math.random() * 50, 0, 120 + Math.random() * 100, 120 + Math.round(Math.random() * 50), 96 + Math.random() * 50, 96 + Math.round(Math.random() * 50), 100000000));
+        mobs[4] = new Mobs("Dragão");
     }
 
 }

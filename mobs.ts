@@ -1,48 +1,22 @@
 import Personagem from "./person";
+import Atributos from "./Atributos";
+export default class Mobs extends Atributos {
 
-export default class Mobs {
     constructor(
-        private _nome: string,
-        private _HPMax: number,
-        private _vida: number,
-        private _destreza: number,
-        private _ataque: number,
-        private _esquiva: number,
-        private _defesa: number,
-        private _xp: number
-
-    ) {}
-
-    public get nome() : string {
-        return this._nome;
-    }
-    public get HPMax() : number {
-        return this._HPMax;
-    }
-    public get vida() : number {
-        return this._vida;
-    }
-    public get destreza() : number {
-        return this._destreza
-    }
-    public get ataque() : number {
-        return this._ataque
-    }
-    public get esquiva() : number {
-        return this._esquiva
-    }
-    public get defesa() : number {
-        return this._defesa
-    }
-    public get xp() : number {
-        return this._xp
+        _nome: string,
+    ) {
+        if ( _nome == 'Slime') 
+            super(_nome, 5 + Math.random() * 10, 0, 5 + Math.random() * 15, 5 + Math.round(Math.random() * 10), 3 + Math.random() * 10, 3 + Math.round(Math.random() * 10), 5);
+        else if (_nome == 'Goblin')
+        super(_nome, 15 + Math.random() * 15, 0, 10 + Math.random() * 30, 10 + Math.round(Math.random() * 20), 6 + Math.random() * 15, 6 + Math.round(Math.random() * 15), 10);
+        else if (_nome == 'Orc')
+        super(_nome, 30 + Math.random() * 20, 0, 20 + Math.random() * 50, 20 + Math.round(Math.random() * 30), 12 + Math.random() * 20, 12 + Math.round(Math.random() * 20), 20);
+        else if (_nome == 'Vampiro')
+        super(_nome, 60 + Math.random() * 30, 0, 40 + Math.random() * 75, 40 + Math.round(Math.random() * 40), 24 + Math.random() * 30, 24 + Math.round(Math.random() * 30), 40);
+        else if (_nome == 'Dragão')
+        super(_nome, 240 + Math.random() * 50, 1, 120 + Math.random() * 100, 120 + Math.round(Math.random() * 50), 96 + Math.random() * 50, 96 + Math.round(Math.random() * 50), 100000000);
     }
 
-    
-    public set setVida(valor : number) {
-        this._vida = valor;
-    }
-    
     contraAtaque(person: Personagem): string {
         let dano = 0;
         let acerto = false;
@@ -70,7 +44,7 @@ export default class Mobs {
             ("\nAtaque: " + this._ataque) +
             ("\nDefesa: " + this._defesa) +
             ("\nEsquiva: " + this._esquiva)
-                  
+
         );
     }
 }

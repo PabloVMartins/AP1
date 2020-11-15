@@ -1,51 +1,15 @@
 import Mobs from "./mobs";
+import Atributos from "./Atributos";
 
-export default class Personagem {
-    constructor(
-        private _nome: string,
-        private _HPMax: number,
-        private _vida: number,
-        private _destreza: number,
-        private _ataque: number,
-        private _esquiva: number,
-        private _defesa: number,
-        private _stamina: number,
-        private _xp: number,
-        private _xpNecessario: number,
-        private _level: number
-    ) { }
+export default class Personagem extends Atributos {
+    private _xpNecessario: number;
+    private _level: number;
 
-    
-    public get nome() : string {
-        return this._nome;
+    constructor(_nome: string) {
+        super(_nome, 15, 15, 15, 13, 13, 13, 50)
+        this._xpNecessario = 5;
+        this._level = 1;
     }
-    public get HPMax() : number {
-        return this._HPMax;
-    }
-    public get vida() : number {
-        return this._vida;
-    }
-    public get destreza() : number {
-        return this._destreza
-    }
-    public get ataque() : number {
-        return this._ataque
-    }
-    public get esquiva() : number {
-        return this._esquiva
-    }
-    public get defesa() : number {
-        return this._defesa
-    }
-    public get xp() : number {
-        return this._xp
-    }
-
-
-    public set setVida(valor : number) {
-        this._vida = valor;
-    }
-
 
     status(): string {
         return (
@@ -57,8 +21,7 @@ export default class Personagem {
             ("\nAtaque: " + this._ataque) +
             ("\nDefesa: " + this._defesa) +
             ("\nEsquiva: " + this._esquiva) +
-            ("\nStamina: " + this._stamina) +
-            ("\nExperiência: " + this._xp + "\n")       
+            ("\nExperiência: " + this._xp + "\n")
         );
     }
     up(): void {
@@ -72,7 +35,7 @@ export default class Personagem {
     }
     matou(mobs: Mobs): string {
         let xpGanho
-        
+
         this._xp += mobs.xp;
 
         xpGanho = `\nVocê ganhou ${mobs.xp} de experiência`
@@ -85,7 +48,6 @@ export default class Personagem {
         return (xpGanho);
     }
     descansar(): string {
-        this._stamina = 100;
         this._vida = this._HPMax;
         return ("HP Recuperado!");
     }
@@ -139,7 +101,7 @@ export default class Personagem {
         if (this._vida <= 0) {
             this._vida = 1;
         }
-        else {           
+        else {
             logBatalha.push(this.matou(mobs));
         }
 
@@ -148,7 +110,7 @@ export default class Personagem {
     }
 
     definirNivel(Nivel: number): void {
-        for (let i = 0; i < Nivel-1; i++) {
+        for (let i = 0; i < Nivel - 1; i++) {
             this.up();
         }
     }
