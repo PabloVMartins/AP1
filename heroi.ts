@@ -1,12 +1,12 @@
 import Mobs from "./mobs";
-import Atributos from "./Atributos";
+import Personagem from "./personagem";
 
-export default class Personagem extends Atributos {
+export default class Heroi extends Personagem {
     private _xpNecessario: number;
     private _level: number;
 
     constructor(_nome: string) {
-        super(_nome, 15, 15, 15, 13, 13, 13, 50)
+        super(_nome, 15, 15, 15, 13, 13, 13, 0)
         this._xpNecessario = 5;
         this._level = 1;
     }
@@ -62,7 +62,7 @@ export default class Personagem extends Atributos {
             if (this._ataque <= mobs.defesa) {
                 dano = 1;
             }
-            mobs.setVida = mobs.vida - dano;
+            mobs.vida = mobs.vida - dano;
         }
 
         if (acerto) {
@@ -90,7 +90,7 @@ export default class Personagem extends Atributos {
     Batalha(mobs: Mobs): string[] {
 
         let logBatalha: string[] = []
-        mobs.setVida = mobs.HPMax;
+        mobs.vida = mobs.HPMax;
 
 
         for (let i = 0; this._vida > 0 && mobs.vida > 0; i++) {

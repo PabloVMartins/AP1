@@ -1,4 +1,4 @@
-export default class Atributos {
+export default class Personagem {
 
     constructor(
         protected _nome: string,
@@ -36,7 +36,7 @@ export default class Atributos {
         return this._xp
     }
 
-    public set setVida(valor: number) {
+    public set vida(valor: number) {
         this._vida = valor;
     }
 }

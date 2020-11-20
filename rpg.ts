@@ -1,8 +1,8 @@
-import Personagem from "./person";
+import Heroi from "./heroi";
 import Mobs from "./mobs";
 import prompt from "prompt-sync";
 
-let person: Personagem = new Personagem("Suyside");
+let person: Heroi = new Heroi("Suyside");
 
  // person.definirNivel(50);
 

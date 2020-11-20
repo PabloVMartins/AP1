@@ -1,6 +1,6 @@
-import Personagem from "./person";
-import Atributos from "./Atributos";
-export default class Mobs extends Atributos {
+import Heroi from "./heroi";
+import Personagem from "./personagem";
+export default class Mobs extends Personagem {
 
     constructor(
         _nome: string,
@@ -27,7 +27,7 @@ export default class Mobs extends Atributos {
             if (this._ataque <= person.defesa) {
                 dano = 1;
             }
-            person.setVida = person.vida - dano;
+            person.vida = person.vida - dano;
         }
         if (acerto) {
             return (`${person.nome} recebeu um golpe: ${dano}`);
